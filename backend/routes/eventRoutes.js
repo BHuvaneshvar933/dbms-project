@@ -90,7 +90,7 @@ router.post("/register", async (req, res) => {
     await Payment.create({
       booking_id: booking.id,
       amount: totalPrice,
-      status: "pending",
+      status: "completed",
     });
 
     res.json({ message: "Successfully registered!", booking });
@@ -111,5 +111,16 @@ router.get("/:id/bookings", checkRole("organizer"), async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+//  Get all categories (for dropdown in frontend)
+router.get("/categories/list", async (req, res) => {
+  try {
+    const categories = await Category.findAll({ attributes: ["id", "name"] });
+    res.json(categories);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 export default router;

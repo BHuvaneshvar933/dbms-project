@@ -27,8 +27,8 @@ Payment.belongsTo(Booking, { foreignKey: "booking_id" });
 
 // Feedback ↔ User ↔ Event
 User.hasMany(Feedback, { foreignKey: "userId", onDelete: "CASCADE" });
-Event.hasMany(Feedback, { foreignKey: "eventId", onDelete: "CASCADE" });
+Event.hasMany(Feedback, { foreignKey: "event_id", onDelete: "CASCADE" });
 Feedback.belongsTo(User, { foreignKey: "userId" });
-Feedback.belongsTo(Event, { foreignKey: "eventId" });
+Feedback.belongsTo(Event, { foreignKey: "event_id" });
 
 export { User, Event, Booking, Category, Payment };

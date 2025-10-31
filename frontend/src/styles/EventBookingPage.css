@@ -1,0 +1,243 @@
+/* Event Booking Page Container */
+.event-booking-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  padding: 2rem 1rem;
+}
+
+.booking-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Loading State */
+.loading-state {
+  text-align: center;
+  color: #6b7280;
+  padding: 3rem;
+  font-size: 1.125rem;
+  font-style: italic;
+}
+
+/* Event Details Card */
+.event-details-card {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.event-title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #22d3ee;
+}
+
+.event-description {
+  color: #4b5563;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.event-info-item {
+  display: flex;
+  align-items: center;
+  color: #374151;
+  font-size: 1rem;
+  padding: 0.75rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border-left: 3px solid #22d3ee;
+}
+
+.event-info-item strong {
+  color: #1f2937;
+  margin-right: 0.5rem;
+  min-width: 120px;
+}
+
+.event-price {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #22d3ee;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%);
+  border-radius: 0.75rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Booking Form Card */
+.booking-form-card {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.booking-form-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #22d3ee;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.ticket-input {
+  width: 100%;
+  padding: 0.875rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.ticket-input:focus {
+  outline: none;
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1);
+}
+
+/* Total Price Display */
+.total-price-display {
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-radius: 0.75rem;
+  border-left: 4px solid #10b981;
+  margin-top: 1rem;
+}
+
+.total-price-label {
+  font-size: 0.875rem;
+  color: #065f46;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.total-price-amount {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #059669;
+}
+
+/* Submit Button */
+.submit-button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background-color: #22d3ee;
+  color: #1f2937;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  background-color: #06b6d4;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(34, 211, 238, 0.3);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+.submit-button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Message */
+.message {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.message.success {
+  background-color: #d1fae5;
+  color: #065f46;
+  border-left: 4px solid #10b981;
+}
+
+.message.error {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border-left: 4px solid #ef4444;
+}
+
+/* Responsive Design */
+@media (min-width: 640px) {
+  .event-info-item {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 768px) {
+  .event-booking-page {
+    padding: 3rem 1.5rem;
+  }
+
+  .event-details-card,
+  .booking-form-card {
+    padding: 3rem;
+  }
+
+  .event-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .event-title {
+    font-size: 1.75rem;
+  }
+
+  .event-price {
+    font-size: 1.5rem;
+  }
+
+  .total-price-amount {
+    font-size: 1.5rem;
+  }
+}

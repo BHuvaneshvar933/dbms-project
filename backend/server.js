@@ -31,7 +31,7 @@ app.use("/bookings", bookingRoutes);
 app.use("/payments", paymentRoutes);
 app.use("/users", userRoutes);
 app.use("/categories",categoryRoutes);
-app.use("/feedbacks", feedbackRoutes);
+app.use("/feedback", feedbackRoutes);
 
 console.log(" Starting backend server...");
 
