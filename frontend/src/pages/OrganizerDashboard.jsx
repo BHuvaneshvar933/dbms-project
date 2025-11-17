@@ -22,6 +22,7 @@ export default function OrganizerDashboard() {
     end_date: "",
     price: "",
     category_name: "",
+    available_seats: "", 
   });
 
   // Fetch all categories
@@ -46,8 +47,13 @@ export default function OrganizerDashboard() {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
+        console.log("Fetched events from backend:", data);
+        console.log("Current user ID:", user.id);
         const organizerEvents = data.filter(
-          (event) => event.created_by === user.id
+          (event) => {
+            console.log(`Event ID: ${event.id}, Created By: ${event.created_by}`);
+            return event.created_by === user.id;
+          }
         );
         setEvents(organizerEvents);
       } catch (err) {
@@ -74,6 +80,11 @@ export default function OrganizerDashboard() {
       return;
     }
 
+    if (!formData.available_seats || formData.available_seats <= 0) {
+      setMessage("Please enter a valid number of available seats.");
+      return;
+    }
+
     try {
       const res = await fetch("http://localhost:5000/events", {
         method: "POST",
@@ -89,6 +100,7 @@ export default function OrganizerDashboard() {
           end_date: formData.end_date,
           price: formData.price,
           category_id,
+          available_seats: formData.available_seats, // ✅ include in body
         }),
       });
 
@@ -104,6 +116,7 @@ export default function OrganizerDashboard() {
           end_date: "",
           price: "",
           category_name: "",
+          available_seats: "",
         });
       } else {
         setMessage(data.message || "Failed to create event.");
@@ -245,6 +258,19 @@ export default function OrganizerDashboard() {
               </div>
 
               <div className="form-group">
+                <label htmlFor="available_seats">Available Seats</label>
+                <input
+                  id="available_seats"
+                  type="number"
+                  name="available_seats"
+                  placeholder="100"
+                  value={formData.available_seats}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
                 <label htmlFor="category_name">Category</label>
                 <select
                   id="category_name"
@@ -283,6 +309,9 @@ export default function OrganizerDashboard() {
                     <p className="event-details">
                       {event.start_date} to {event.end_date} @ {event.location}
                     </p>
+                    <p className="event-seats">
+                      🎟️ Available Seats: <strong>{event.available_seats}</strong>
+                    </p>
                   </div>
                   <div className="event-actions">
                     <button
@@ -309,7 +338,6 @@ export default function OrganizerDashboard() {
             <h3 className="section-title">
               Bookings for <span className="highlight">{selectedEvent.name}</span>
             </h3>
-            
 
             {loadingBookings ? (
               <p className="loading-state">Loading bookings...</p>
@@ -342,7 +370,6 @@ export default function OrganizerDashboard() {
             <h3 className="section-title">
               Feedback for <span className="highlight">{selectedEvent.name}</span>
             </h3>
-           
 
             {loadingFeedbacks ? (
               <p className="loading-state">Loading feedback...</p>

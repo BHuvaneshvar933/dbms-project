@@ -4,6 +4,7 @@ import User from "../models/user.js";
 import bcrypt from "bcrypt";
 import validateRequest from "../middleware/validateRequest.js";
 import { registerUserValidator, loginUserValidator } from "../validators/userValidator.js";
+import { SQL_QUERIES, rSql } from "../SQLQueries.js";
 
 
 const router = express.Router();
@@ -14,11 +15,13 @@ router.post("/register", async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
 
+    rSql("SELECT_USER_BY_EMAIL", SQL_QUERIES.SELECT_USER_BY_EMAIL, [email]);
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) return res.status(400).json({ message: "Email already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    rSql("INSERT_USER", SQL_QUERIES.INSERT_USER, [name, email, hashedPassword, role || "user", null]);
     const user = await User.create({
       name,
       email,
@@ -38,11 +41,13 @@ router.post("/register-organizer", async (req, res) => {
   try {
     const { name, email, password, organization_name } = req.body;
 
+    rSql("SELECT_USER_BY_EMAIL", SQL_QUERIES.SELECT_USER_BY_EMAIL, [email]);
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) return res.status(400).json({ message: "Email already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    rSql("INSERT_USER", SQL_QUERIES.INSERT_USER, [name, email, hashedPassword, "organizer", organization_name]);
     const user = await User.create({
       name,
       email,
@@ -65,6 +70,7 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    rSql("SELECT_USER_BY_EMAIL", SQL_QUERIES.SELECT_USER_BY_EMAIL, [email]);
     const user = await User.findOne({ where: { email } });
     if (!user) return res.status(404).json({ message: "User not found" });
 

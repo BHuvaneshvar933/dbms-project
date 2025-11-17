@@ -11,6 +11,7 @@ import sequelize from "./config/db.js";
 import "./models/index.js"; 
 import categoryRoutes from "./routes/categoryRoutes.js";
 import feedbackRoutes from "./routes/feedbackRoutes.js";
+import { SQL_QUERIES } from "./SQLQueries.js";
 
 dotenv.config();
 const app = express();
@@ -39,7 +40,7 @@ console.log(" Starting backend server...");
 const PORT = process.env.PORT || 5000;
 sequelize
   .sync({ alter: true }) 
-  .then(() => {
+  .then(async () => {
     console.log(" MySQL Connected & Tables Synced");
     app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
   })

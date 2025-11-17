@@ -37,7 +37,7 @@ export default function EventsPage() {
                 <div className="event-details">
                   <div className="event-detail-item">
                     <span className="detail-label">Venue:</span>
-                    <span className="detail-value">{event.venue}</span>
+                    <span className="detail-value">{event.location}</span>
                   </div>
                   
                   <div className="event-detail-item">

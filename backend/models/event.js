@@ -40,6 +40,16 @@ const Event = sequelize.define("Event", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  available_seats: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 100, 
+  },
+  total_seats: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+  },
 });
 
 // Associations

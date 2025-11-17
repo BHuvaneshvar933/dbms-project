@@ -90,7 +90,7 @@ export default function EventBookingPage() {
           <div className="event-info">
             <div className="event-info-item">
               <strong>Venue:</strong>
-              <span>{event.venue}</span>
+              <span>{event.location}</span>
             </div>
             <div className="event-info-item">
               <strong>Start Date:</strong>
