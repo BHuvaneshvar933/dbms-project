@@ -30,10 +30,9 @@
     DB_USER=root
     DB_PASSWORD=your_mysql_password
     DB_NAME=event_management
-    JWT_SECRET=your_jwt_secret_key
+    JWT_SECRET=secret123
     ```
     *   Replace `your_mysql_password` with your MySQL root password.
-    *   Replace `your_jwt_secret_key` with a strong, random string.
 
 ## Frontend Setup
 
