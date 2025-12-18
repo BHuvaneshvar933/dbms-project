@@ -142,17 +142,7 @@ export const SQL_QUERIES = {
 export const rSql = (queryName, queryString, params = []) => {
   let formattedQuery = queryString;
   let paramIndex = 0;
-  formattedQuery = formattedQuery.replace(/\?/g, () => {
-    const param = params[paramIndex];
-    paramIndex++;
-    if (typeof param === 'string') {
-      return `'${param}'`;
-    } else if (param === null || param === undefined) {
-      return 'NULL';
-    } else {
-      return param;
-    }
-  });
+  
   console.log(`Executing: ${queryName}`);
   console.log(formattedQuery);
   console.log("----------------------------------------------------------");

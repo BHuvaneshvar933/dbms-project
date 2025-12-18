@@ -15,23 +15,17 @@ router.post("/book", async (req, res) => {
     if (!event_id || !user_id || !no_of_tickets) {
       return res.status(400).json({ message: "Missing required fields" });
     }
-
-    // Fetch the event
     rSql("SELECT_EVENT_BY_ID_FOR_UPDATE", SQL_QUERIES.SELECT_EVENT_BY_ID_FOR_UPDATE, [event_id]);
     const event = await Event.findByPk(event_id);
     if (!event) return res.status(404).json({ message: "Event not found" });
-
-    // ✅ Check available seats before booking
     if (event.available_seats < no_of_tickets) {
       return res.status(400).json({
         message: `Only ${event.available_seats} seats available for this event.`,
       });
     }
 
-    // Calculate total price
     const total_price = event.price * no_of_tickets;
 
-    // Create booking record
     rSql("INSERT_BOOKING", SQL_QUERIES.INSERT_BOOKING, [event_id, user_id, no_of_tickets, total_price]);
     const booking = await Booking.create({
       event_id,
@@ -40,7 +34,6 @@ router.post("/book", async (req, res) => {
       total_price,
     });
 
-    // Create payment record
     rSql("INSERT_PAYMENT", SQL_QUERIES.INSERT_PAYMENT, [booking.id, total_price, "pending"]);
     const payment = await Payment.create({
       bookingId: booking.id,

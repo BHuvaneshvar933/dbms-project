@@ -14,7 +14,6 @@ export default function LoginPage() {
 
     if (success) {
       setError("");
-      alert("Login successful!");
 
       const storedUser = JSON.parse(localStorage.getItem("user"));
       const role = storedUser?.role;
