@@ -19,8 +19,6 @@
 
     ```bash
     npm install
-    # or
-    yarn install
     ```
 
 3.  **Create a `.env` file:**
